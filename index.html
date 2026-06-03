@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Indulge in Pizza Classic - authentic wood-fired gourmet pizzas made with premium ingredients. Order Margherita, Pepperoni, Veggie, and Seafood pizzas online today.">
+  <title>Pizza Classic - Premium Wood-Fired Gourmet Pizza</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Fullscreen Splat Overlay for throwing tomatoes -->
+  <div id="splash-overlay" class="splash-overlay"></div>
+
+  <div class="app-container">
+    
+    <!-- Header -->
+    <header id="main-header">
+      <nav class="navbar" aria-label="Main Navigation">
+        <a href="#" class="logo" id="logo-home-link">
+          <span class="logo-pizza">🍕</span> Pizza <span>Classic</span>
+        </a>
+        
+        <!-- Mobile hamburger menu -->
+        <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Navbar navigation links -->
+        <ul class="nav-links" id="nav-links">
+          <li data-route="home" class="active"><a href="#" id="nav-link-home">Home</a></li>
+          <li data-route="about"><a href="#" id="nav-link-about">About Us</a></li>
+          <li data-route="contact"><a href="#" id="nav-link-contact">Contact Us</a></li>
+          <li data-route="tomato"><a href="#" id="nav-link-tomato" style="color: var(--color-primary); font-weight: 700;">Tomato Launcher 🍅</a></li>
+        </ul>
+
+        <!-- Live Search Bar -->
+        <div class="search-container">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+          <input type="text" id="product-search" placeholder="Search pizzas..." aria-label="Search through pizzas">
+        </div>
+
+        <!-- Music Controller Widget -->
+        <div class="audio-widget">
+          <button class="audio-btn" id="btn-play-pause-music" aria-label="Play or pause background music">
+            <svg id="audio-play-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            <svg id="audio-pause-icon" viewBox="0 0 24 24" style="display: none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+          <div class="track-info">
+            <span id="track-title-label">Tarantella (Italian Folk)</span>
+          </div>
+          <button class="audio-btn" id="btn-next-track" title="Next track" aria-label="Change music track">
+            <svg viewBox="0 0 24 24"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg>
+          </button>
+          <div class="audio-controls-popup">
+            <input type="range" id="volume-slider" class="volume-slider" min="0" max="0.8" step="0.05" value="0.3" aria-label="Adjust volume">
+          </div>
+        </div>
+
+        <!-- Cart and Auth Actions -->
+        <div class="nav-actions">
+          <a href="https://github.com/moalqasem" target="_blank" class="github-nav-link" id="github-header-link" aria-label="Developer GitHub Profile" title="Developer GitHub Profile">
+            <svg viewBox="0 0 24 24" class="github-icon" style="width: 22px; height: 22px; fill: var(--color-text-muted); transition: fill var(--transition-fast); vertical-align: middle; margin-right: 0.5rem;"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.137 20.162 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>
+          </a>
+          <button class="cart-icon-container" id="btn-cart-trigger" aria-label="View shopping cart">
+            <svg viewBox="0 0 24 24"><path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-1.45-5c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.37-.66-.11-1.48-.87-1.48H5.21l-.94-2H1v2h2l3.6 7.59-1.35 2.44C5.07 13.5 5 13.74 5 14c0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45z"/></svg>
+            <span class="cart-badge" id="cart-badge" style="display: none;">0</span>
+          </button>
+          <button class="user-status-btn" id="nav-user-status">Login</button>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main Content Area -->
+    <main>
+      
+      <!-- ================= HOMEPAGE VIEW ================= -->
+      <section id="home-view" class="view active">
+        <!-- Hidden Title for SEO compliance -->
+        <h1 style="display:none;">Pizza Classic - Fresh Wood-Fired Pizza Delivery</h1>
+        
+        <!-- Hero section -->
+        <div class="hero-section">
+          <h2>Taste the Italian Heritage</h2>
+          <p>Every pizza is baked at 900°F in our wood-fired brick oven, utilizing San Marzano tomatoes, fresh hand-pulled mozzarella, and locally sourced artisanal toppings.</p>
+        </div>
+
+        <!-- Menu Navigation and Category Filters -->
+        <div class="menu-controls">
+          <div class="category-tabs" role="tablist" aria-label="Pizza Categories">
+            <button class="tab-btn active" role="tab" aria-selected="true" data-category="all">All Pizzas</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-category="meat">Meat Lover</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-category="vegetarian">Vegetarian</button>
+            <button class="tab-btn" role="tab" aria-selected="false" data-category="seafood">Seafood</button>
+          </div>
+        </div>
+
+        <!-- Pizza cards grid -->
+        <div class="pizza-grid" id="pizza-grid">
+          <!-- Pizza items loaded dynamically from app.js -->
+        </div>
+
+        <!-- Special Offers Section -->
+        <section class="offers-section" aria-labelledby="offers-title">
+          <h2 class="section-title" id="offers-title">Daily Special Offers</h2>
+          <div class="offers-grid">
+            
+            <!-- Offer 1 -->
+            <div class="offer-card">
+              <div class="offer-badge">20% OFF</div>
+              <h3 class="offer-title">Cheesy Tuesday</h3>
+              <p class="offer-desc">Get a whopping 20% off on our legendary Four Cheese (Quattro Formaggi) pizza today. Rich mozzarella, gorgonzola, parmesan, and goat cheese!</p>
+              <div class="offer-timer-container">
+                <span class="offer-timer-label">Deal Expires Soon</span>
+                <div class="offer-progress-bar">
+                  <div class="offer-progress" style="width: 75%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Offer 2 -->
+            <div class="offer-card">
+              <div class="offer-badge">BOGO</div>
+              <h3 class="offer-title">Seafood Feast</h3>
+              <p class="offer-desc">Buy one Gourmet Seafood Pizza and get a Margherita absolutely free. Perfect choice for ocean lovers who crave a rustic wood-fired finish.</p>
+              <div class="offer-timer-container">
+                <span class="offer-timer-label">Deal Expires Soon</span>
+                <div class="offer-progress-bar">
+                  <div class="offer-progress" style="width: 45%;"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Offer 3 -->
+            <div class="offer-card">
+              <div class="offer-badge">FREE DRINK</div>
+              <h3 class="offer-title">Supreme Combo</h3>
+              <p class="offer-desc">Order any Super Supreme Pizza and receive a free 1.5L Italian sparkling soda. Loaded with pepperoni, sausage, ham, and fresh vegetables.</p>
+              <div class="offer-timer-container">
+                <span class="offer-timer-label">Deal Expires Soon</span>
+                <div class="offer-progress-bar">
+                  <div class="offer-progress" style="width: 90%;"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </section>
+      </section>
+
+      <!-- ================= ABOUT US VIEW ================= -->
+      <section id="about-view" class="view">
+        <div class="about-view">
+          <div class="about-hero">
+            <h2>Our Story</h2>
+            <p>Crafting authentic Neapolitan pizzas since 1994, honoring centuries-old Italian baking techniques.</p>
+          </div>
+          
+          <div class="about-content">
+            <div class="about-text">
+              <h3>Dough, Tomatoes, and Love</h3>
+              <p>At Pizza Classic, our dough undergoes a slow 48-hour cold fermentation process, resulting in a light, airy, and perfectly charred crust. We source our flour directly from mills in Campania, Italy.</p>
+              <p>Our pizza sauce contains only 100% organic San Marzano tomatoes, crushed by hand with a pinch of sea salt. No preservatives, no added sugars. Just the raw, sweet taste of nature.</p>
+            </div>
+            <div class="about-images">
+              <div class="about-img-frame">
+                <img src="assets/images/pizza_login_bg.png" alt="Wood-fired oven interior baking fresh pizzas" />
+              </div>
+            </div>
+          </div>
+
+          <div class="team-section">
+            <h3 class="section-title">Meet Our Master Pizzaiolos</h3>
+            <div class="team-grid">
+              <!-- Chef 1 -->
+              <div class="team-card">
+                <div class="team-avatar">👨‍🍳</div>
+                <div class="team-name">Mario Rossi</div>
+                <div class="team-role">Head Chef & Pizzaiolo</div>
+              </div>
+              <!-- Chef 2 -->
+              <div class="team-card">
+                <div class="team-avatar">👩‍🍳</div>
+                <div class="team-name">Lucia Bianchi</div>
+                <div class="team-role">Sourdough Specialist</div>
+              </div>
+              <!-- Chef 3 -->
+              <div class="team-card">
+                <div class="team-avatar">🍕</div>
+                <div class="team-name">Giovanni Verdi</div>
+                <div class="team-role">Wood-Oven Master</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CONTACT US VIEW ================= -->
+      <section id="contact-view" class="view">
+        <div class="contact-view">
+          <div class="contact-container">
+            <div class="contact-header">
+              <h2>Get in Touch</h2>
+              <p>Have comments, suggestions, or catering inquiries? Drop us a message below!</p>
+            </div>
+            <form id="contact-form">
+              <div class="form-group">
+                <label for="contact-name">Full Name</label>
+                <input type="text" id="contact-name" class="form-input" required placeholder="John Doe">
+              </div>
+              <div class="form-group">
+                <label for="contact-email">Email Address</label>
+                <input type="email" id="contact-email" class="form-input" required placeholder="john@example.com">
+              </div>
+              <div class="form-group">
+                <label for="contact-message">Message</label>
+                <textarea id="contact-message" class="form-input" rows="5" required placeholder="Tell us how we can help..."></textarea>
+              </div>
+              <button type="submit" id="btn-submit-contact" class="btn-primary">Send Message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= TOMATO LAUNCHER VIEW ================= -->
+      <section id="tomato-view" class="view">
+        <div class="tomato-view">
+          <div class="tomato-container">
+            <div class="tomato-asset-wrapper">
+              <img src="assets/images/tomato_icon.png" alt="Gourmet ripe red tomato" id="img-tomato-interactive" />
+            </div>
+            <div class="tomato-question">Do you want the tomato?</div>
+            <p style="color: var(--color-text-muted); max-width: 500px; margin: 0 auto;">Click the button below to launch a ripe tomato. Watch it fly across the screen, splattering directly onto the window with interactive liquid sounds and drips!</p>
+            
+            <div class="tomato-actions">
+              <button id="btn-throw-tomato" class="btn-tomato">
+                <span>Throw Tomato 🍅</span>
+              </button>
+              <button id="btn-clear-splats" class="btn-clear-splats">Try Again (Clean Splats)</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= LOGIN / AUTH VIEW ================= -->
+      <section id="login-view" class="view">
+        <div class="login-view">
+          <!-- Animated pizza backgrounds -->
+          <div class="login-bg-container" style="background-image: url('assets/images/pizza_login_bg.png');"></div>
+          <div class="login-particles" id="login-particles"></div>
+          
+          <div class="login-card">
+            <div class="login-header">
+              <h2>Pizza Classic</h2>
+              <p>Login to start ordering gourmet wood-fired pizza.</p>
+            </div>
+            
+            <form id="login-form">
+              <div class="form-group">
+                <label for="login-email">Email Address</label>
+                <input type="email" id="login-email" class="form-input" required placeholder="admin@pizzaclassic.com">
+              </div>
+              <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" class="form-input" required placeholder="••••••••">
+              </div>
+              <button type="submit" id="btn-submit-login" class="btn-primary">Login</button>
+            </form>
+            
+            <div class="login-footer">
+              <p>Don't have an account?<a href="#" id="btn-show-register">Create New Account</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= CHECKOUT VIEW ================= -->
+      <section id="checkout-view" class="view">
+        <div class="checkout-view">
+          <h2 class="section-title">Complete Your Order</h2>
+          
+          <div class="checkout-grid">
+            <!-- Left Panel: Details Form -->
+            <form id="checkout-form">
+              
+              <!-- Address Details Card -->
+              <div class="checkout-card" style="margin-bottom: 2rem;">
+                <h3>Delivery Address</h3>
+                <div class="form-group">
+                  <label for="checkout-fullname">Full Name</label>
+                  <input type="text" id="checkout-fullname" class="form-input" required placeholder="John Doe">
+                </div>
+                <div class="form-group">
+                  <label for="checkout-street">Street Address</label>
+                  <input type="text" id="checkout-street" class="form-input" required placeholder="123 Gourmet Ave">
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                  <div class="form-group">
+                    <label for="checkout-city">City</label>
+                    <input type="text" id="checkout-city" class="form-input" required placeholder="Naples">
+                  </div>
+                  <div class="form-group">
+                    <label for="checkout-phone">Phone Number</label>
+                    <input type="tel" id="checkout-phone" class="form-input" required placeholder="555-0199">
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Details Card -->
+              <div class="checkout-card">
+                <h3>Select Payment Method</h3>
+                
+                <!-- Toggle Grid -->
+                <div class="payment-options-grid">
+                  <div class="payment-option-card active" data-method="credit-card" role="button" tabindex="0">
+                    <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                    <span class="payment-option-label">Credit Card</span>
+                  </div>
+                  <div class="payment-option-card" data-method="paypal" role="button" tabindex="0">
+                    <svg viewBox="0 0 24 24"><path d="M20 8.5c0-2.5-1.5-4.5-4.5-4.5H9c-.55 0-1 .45-1 1v13c0 .55.45 1 1 1h2.5c.55 0 1-.45 1-1v-4.5H15c2.5 0 5-1.5 5-5z"/></svg>
+                    <span class="payment-option-label">PayPal</span>
+                  </div>
+                  <div class="payment-option-card" data-method="cash" role="button" tabindex="0">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H7c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.04-.42 1.99-1.07 2.75z"/></svg>
+                    <span class="payment-option-label">Cash on Delivery</span>
+                  </div>
+                </div>
+
+                <!-- Payment input blocks -->
+                <!-- Credit Card fields -->
+                <div class="payment-fields-section active" id="payment-fields-credit-card">
+                  <div class="credit-card-form">
+                    <div class="form-group">
+                      <label for="card-number">Card Number</label>
+                      <input type="text" id="card-number" class="form-input" placeholder="4111 2222 3333 4444" pattern="\d{4}\s?\d{4}\s?\d{4}\s?\d{4}">
+                    </div>
+                    <div class="form-group" style="grid-column: span 2;">
+                      <label for="card-expiry">Expiry Date</label>
+                      <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY" maxlength="5">
+                    </div>
+                    <div class="form-group">
+                      <label for="card-cvv">CVV</label>
+                      <input type="password" id="card-cvv" class="form-input" placeholder="123" maxlength="3">
+                    </div>
+                  </div>
+                </div>
+
+                <!-- PayPal fields -->
+                <div class="payment-fields-section" id="payment-fields-paypal">
+                  <div style="text-align: center; padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--border-radius-md); border: 1px solid var(--border-glass);">
+                    <p style="color: var(--color-text-muted); margin-bottom: 1rem;">Click the button below to log in safely to your PayPal account in a secure modal window.</p>
+                    <button type="button" class="btn-primary" style="background-color: #f2c94c; color: #121214; width: auto; padding: 0.6rem 2rem;">Log In with PayPal</button>
+                  </div>
+                </div>
+
+                <!-- Cash fields -->
+                <div class="payment-fields-section" id="payment-fields-cash">
+                  <div style="padding: 1.5rem; background: var(--bg-tertiary); border-radius: var(--border-radius-md); border: 1px solid var(--border-glass);">
+                    <p style="color: var(--color-text-muted); margin-bottom: 0;">No prepayment necessary. Simply pay the delivery driver with cash or mobile card terminals when your fresh pizza arrives at your doorstep.</p>
+                  </div>
+                </div>
+
+                <!-- Checkout button -->
+                <button type="submit" id="btn-submit-order" class="btn-primary" style="margin-top: 2rem;">Place Your Order</button>
+
+              </div>
+            </form>
+
+            <!-- Right Panel: Summary -->
+            <div class="order-summary-card">
+              <h3 style="font-size: 1.4rem; margin-bottom: 1.5rem; border-bottom: 1px solid var(--border-glass); padding-bottom: 0.75rem; color: var(--color-text);">Order Summary</h3>
+              
+              <div class="summary-items-list" id="checkout-items-summary">
+                <!-- Loaded dynamically from app.js -->
+              </div>
+              
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; border-top: 1px solid var(--border-glass); padding-top: 1.25rem;">
+                <div class="cart-summary-row">
+                  <span>Subtotal</span>
+                  <span id="checkout-subtotal">$0.00</span>
+                </div>
+                <div class="cart-summary-row">
+                  <span>VAT (10%)</span>
+                  <span id="checkout-tax">$0.00</span>
+                </div>
+                <div class="cart-summary-row">
+                  <span>Delivery Fee</span>
+                  <span id="checkout-delivery">$0.00</span>
+                </div>
+                <div class="cart-summary-row total">
+                  <span>Total Due</span>
+                  <span id="checkout-total">$0.00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Side Drawer Cart -->
+    <div class="cart-drawer" id="cart-drawer">
+      <div class="cart-drawer-header">
+        <h3>🛒 Shopping Cart</h3>
+        <button class="btn-close-cart" id="btn-close-cart">&times;</button>
+      </div>
+      
+      <!-- Scrollable Cart Item List -->
+      <div class="cart-items-list" id="cart-items-list">
+        <!-- Rendered dynamically in app.js -->
+      </div>
+      
+      <!-- Cart Drawer Footer Summary -->
+      <div class="cart-drawer-footer">
+        <div class="cart-summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">$0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Estimated VAT (10%)</span>
+          <span id="cart-tax">$0.00</span>
+        </div>
+        <div class="cart-summary-row">
+          <span>Delivery Fee</span>
+          <span id="cart-delivery">$3.99</span>
+        </div>
+        <div class="cart-summary-row total">
+          <span>Total</span>
+          <span id="cart-total">$0.00</span>
+        </div>
+        
+        <button class="btn-checkout" id="btn-checkout-trigger">
+          Proceed to Checkout
+        </button>
+      </div>
+    </div>
+
+    <!-- Modals Layout -->
+
+    <!-- Registration Modal -->
+    <div class="modal-overlay" id="register-modal">
+      <div class="modal-content">
+        <button class="close-modal" aria-label="Close Registration Modal">&times;</button>
+        <h3 class="modal-title">Create New Account</h3>
+        <form id="register-form">
+          <div class="form-group">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" class="form-input" required placeholder="Giovanni Smith">
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-input" required placeholder="giovanni@example.com">
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="form-input" required placeholder="Minimum 6 characters" minlength="6">
+          </div>
+          <div class="form-group">
+            <label for="reg-confirm-password">Confirm Password</label>
+            <input type="password" id="reg-confirm-password" class="form-input" required placeholder="Confirm your password">
+          </div>
+          <button type="submit" id="btn-submit-register" class="btn-primary">Register</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Email Verification Modal -->
+    <div class="modal-overlay" id="verification-modal">
+      <div class="modal-content" style="max-width: 420px;">
+        <h3 class="modal-title">Verify Your Email</h3>
+        <p style="color: var(--color-text-muted); text-align: center; font-size: 0.9rem; margin-bottom: 1.25rem;">We have simulated sending a verification email containing a 6-digit confirmation code. Enter the code below:</p>
+        
+        <!-- Mock simulated code popup display -->
+        <div class="verification-code-display">
+          Code: <span id="verification-code-value">849204</span>
+        </div>
+        
+        <form id="verification-form">
+          <div class="form-group">
+            <label for="verification-code-input">Verification Code</label>
+            <input type="text" id="verification-code-input" class="form-input" required placeholder="123456" maxlength="6" style="text-align: center; letter-spacing: 5px; font-weight: 700; font-size: 1.2rem;">
+          </div>
+          <button type="submit" id="btn-submit-verification" class="btn-primary">Confirm Code</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Order Success Completion Modal -->
+    <div class="modal-overlay" id="success-modal">
+      <div class="modal-content" style="text-align: center; padding: 3rem 2rem; max-width: 450px;">
+        <button class="close-modal" aria-label="Close Success Modal">&times;</button>
+        <div class="success-check-icon">✓</div>
+        <h3 class="modal-title" style="margin-bottom: 0.5rem; color: var(--color-green);">Order Placed!</h3>
+        <p style="color: var(--color-text); font-weight: 600; margin-bottom: 0.75rem;">Grazie mille!</p>
+        <p style="color: var(--color-text-muted); font-size: 0.9rem; margin-bottom: 2rem;">Your delicious pizza is being prepared by our pizzaiolos. It will be baked and delivered to your doorstep in approximately 30 minutes.</p>
+        <button class="btn-primary" onclick="navigateTo('home'); document.getElementById('success-modal').classList.remove('active');">Back to Menu</button>
+      </div>
+    </div>
+
+    <!-- Global Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h4>Pizza Classic</h4>
+          <p>Indulge in authentic, wood-fired pizzas handcrafted with passion, fresh ingredients, and baked to crisp perfection.</p>
+          <div class="footer-socials">
+            <a href="https://github.com/moalqasem" target="_blank" class="social-link" id="github-footer-link" aria-label="GitHub Profile" title="Developer GitHub Profile">GH</a>
+            <a href="#" class="social-link" aria-label="Facebook">FB</a>
+            <a href="#" class="social-link" aria-label="Instagram">IG</a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h5>Quick Links</h5>
+          <ul>
+            <li onclick="navigateTo('home')"><a href="#">Our Menu</a></li>
+            <li onclick="navigateTo('about')"><a href="#">Our Story</a></li>
+            <li onclick="navigateTo('contact')"><a href="#">Contact Us</a></li>
+            <li onclick="navigateTo('tomato')"><a href="#">Tomato Game</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Gourmet Menu</h5>
+          <ul>
+            <li><a href="#" onclick="navigateTo('home')">Margherita</a></li>
+            <li><a href="#" onclick="navigateTo('home')">Pepperoni Classic</a></li>
+            <li><a href="#" onclick="navigateTo('home')">Gourmet Seafood</a></li>
+            <li><a href="#" onclick="navigateTo('home')">Truffle Mushroom</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul style="color: var(--color-text-muted); font-size: 0.9rem;">
+            <li>📍 123 Gourmet Ave, Naples, Italy</li>
+            <li>📞 +39 081 555 0199</li>
+            <li>✉️ orders@pizzaclassic.com</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-copyright">
+        &copy; 2026 Pizza Classic Restaurant Group. All rights reserved. | Designed & Developed by <a href="https://github.com/moalqasem" target="_blank" style="color: var(--color-secondary); text-decoration: none; font-weight: 700; transition: color var(--transition-fast);" onmouseover="this.style.color='var(--color-primary)'" onmouseout="this.style.color='var(--color-secondary)'">mo alqasem</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
